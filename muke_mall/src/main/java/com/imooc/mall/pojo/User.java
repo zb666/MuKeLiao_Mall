@@ -1,10 +1,7 @@
 package com.imooc.mall.pojo;
 
-import lombok.Data;
-
 import java.util.Date;
 
-@Data
 public class User {
     private Integer id;
 
@@ -25,16 +22,6 @@ public class User {
     private Date createTime;
 
     private Date updateTime;
-
-    public User() {
-    }
-
-    public User(String username, String password, String email, Integer role) {
-        this.username = username;
-        this.password = password;
-        this.email = email;
-        this.role = role;
-    }
 
     public Integer getId() {
         return id;

@@ -1,10 +1,8 @@
-package com.imooc.mall.service;
+package com.imooc.mall.dao;
 
 import com.imooc.mall.pojo.User;
 
-import java.util.List;
-
-public interface UserService {
+public interface UserMapper {
     int deleteByPrimaryKey(Integer id);
 
     int insert(User record);

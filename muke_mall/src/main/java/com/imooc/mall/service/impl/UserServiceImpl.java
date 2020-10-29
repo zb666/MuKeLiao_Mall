@@ -1,6 +1,6 @@
 package com.imooc.mall.service.impl;
 
-import com.imooc.mall.mapper.IUserMapper;
+import com.imooc.mall.dao.UserMapper;
 import com.imooc.mall.pojo.User;
 import com.imooc.mall.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,26 +12,35 @@ import java.util.List;
 public class UserServiceImpl implements UserService {
 
     @Autowired
-    private IUserMapper userMapper;
+    private UserMapper userMapper;
 
     @Override
-    public List<User> findAll() {
-        return userMapper.findAll();
+    public int deleteByPrimaryKey(Integer id) {
+        return userMapper.deleteByPrimaryKey(id);
     }
 
     @Override
-    public User findUserById(Integer id) {
-        return userMapper.findUserById(id);
+    public int insert(User record) {
+        return userMapper.insert(record);
     }
 
     @Override
-    public Integer updateById(User user) {
-        return userMapper.updateById(user);
+    public int insertSelective(User record) {
+        return userMapper.insertSelective(record);
     }
 
     @Override
-    public void deleteById(Integer id) {
-        userMapper.deleteById(id);
+    public User selectByPrimaryKey(Integer id) {
+        return userMapper.selectByPrimaryKey(id);
     }
 
+    @Override
+    public int updateByPrimaryKeySelective(User record) {
+        return userMapper.updateByPrimaryKeySelective(record);
+    }
+
+    @Override
+    public int updateByPrimaryKey(User record) {
+        return userMapper.updateByPrimaryKey(record);
+    }
 }
