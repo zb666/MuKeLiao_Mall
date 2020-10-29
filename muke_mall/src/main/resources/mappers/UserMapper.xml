@@ -7,4 +7,23 @@
     <select id="findAll" resultType="com.imooc.mall.pojo.User">
         select * from t_user
     </select>
+    <select id="findUserById" resultType="com.imooc.mall.pojo.User" parameterType="java.lang.Integer">
+        select * from t_user where id = #{id,jdbcType=INTEGER}
+    </select>
+    <insert id="insertUser">
+        insert into t_user(id,username,password,salt,create_time)
+        values (#{username},#{password},#{salt},#{create_time,jdbcType=TIMESTAMP})
+    </insert>
+    <update id="updateById" parameterType="com.imooc.mall.pojo.User" useGeneratedKeys="true">
+        UPDATE t_user
+        set username = #{username},
+            password = #{password},
+            create_time = #{createTime,jdbcType=TIMESTAMP}
+        where id = #{id}
+    </update>
+    <delete id="deleteById" parameterType="java.lang.Integer">
+        delete from t_user
+        where id = #{id}
+    </delete>
+
 </mapper>

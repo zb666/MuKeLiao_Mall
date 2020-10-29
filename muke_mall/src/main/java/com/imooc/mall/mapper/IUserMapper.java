@@ -8,4 +8,9 @@ public interface IUserMapper {
 
     List<User> findAll();
 
+    User findUserById(Integer id);
+
+    Integer updateById(User user);
+
+    void deleteById(Integer id);
 }

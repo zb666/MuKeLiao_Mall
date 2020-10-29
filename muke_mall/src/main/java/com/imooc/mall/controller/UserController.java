@@ -8,6 +8,7 @@ import com.imooc.mall.vo.ResponseVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -33,8 +34,23 @@ public class UserController {
         return new ResponseVo<List<User>>(200,users);//userService.findAll();
     }
 
+    @GetMapping("/findById/{id}")
+    public ResponseVo<User> findUserById(@PathVariable("id") Integer id){
+        User user = userService.findUserById(id);
+        return new ResponseVo<User>(200,user);
+    }
 
+    @PostMapping("/updateUserInfo")
+    public ResponseVo<Integer> updateById(@Valid @RequestBody User user){
+        Integer integer = userService.updateById(user);
+        return new ResponseVo<Integer>(200,integer);
+    }
 
+    @DeleteMapping("/deleteUserById/{id}")
+    public ResponseVo<Void> deleteUserById(@PathVariable("id")Integer id){
+        userService.deleteById(id);
+        return new ResponseVo<Void>(200,"删除成功");
+    }
 
 
 }
