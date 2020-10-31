@@ -12,6 +12,7 @@ import com.imooc.mall.vo.ResponseVo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
@@ -45,6 +46,7 @@ public class UserController {
            @Valid @RequestBody UserLoginForm userLoginForm,
            HttpSession httpSession){
         ResponseVo<User> userResponseVo = userService.login(userLoginForm.getUsername(), userLoginForm.getPassword());
+        //这是保存在内存中的
         httpSession.setAttribute(MallConst.CURRET_USER,userResponseVo.getData());
         log.info("/login sessionId={}",httpSession.getId());
         return userResponseVo;
@@ -57,8 +59,12 @@ public class UserController {
         return ResponseVo.success(user);
     }
 
+    /**
+     * {@link TomcatServletWebServerFactory} getSessionTimeoutInMinutes
+     */
     @PostMapping("/user/logout")
     public ResponseVo logout(HttpSession session){
+
         log.info("/user/logout sessionId={}",session.getId());
         session.removeAttribute(MallConst.CURRET_USER);
         return ResponseVo.success();

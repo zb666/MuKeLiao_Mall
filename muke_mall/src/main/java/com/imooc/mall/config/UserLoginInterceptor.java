@@ -20,7 +20,7 @@ public class UserLoginInterceptor implements HandlerInterceptor {
         User user = (User) request.getSession().getAttribute(MallConst.CURRET_USER);
         if(user == null) {
             log.info("user==null");
-            throw new UserLoginException();
+            throw new UserLoginException("");
         }
         return true;
     }

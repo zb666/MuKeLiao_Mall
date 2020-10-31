@@ -9,3 +9,7 @@ mybatis:
     map-underscore-to-camel-case: true
   mapper-locations: classpath:mappers/*.xml
   type-aliases-package: com.imooc.mall.bean
+server:
+  servlet:
+    session:
+      timeout: 30 # link
