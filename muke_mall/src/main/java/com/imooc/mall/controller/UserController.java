@@ -6,7 +6,6 @@ import com.imooc.mall.enums.ResponseEnum;
 import com.imooc.mall.form.UserLoginForm;
 import com.imooc.mall.form.UserRegisterForm;
 import com.imooc.mall.pojo.User;
-import com.imooc.mall.service.IUserService;
 import com.imooc.mall.service.impl.UserServiceImpl;
 import com.imooc.mall.vo.ResponseVo;
 import lombok.extern.slf4j.Slf4j;
@@ -47,7 +46,7 @@ public class UserController {
            HttpSession httpSession){
         ResponseVo<User> userResponseVo = userService.login(userLoginForm.getUsername(), userLoginForm.getPassword());
         //这是保存在内存中的
-        httpSession.setAttribute(MallConst.CURRET_USER,userResponseVo.getData());
+        httpSession.setAttribute(MallConst.CURRENT_USER,userResponseVo.getData());
         log.info("/login sessionId={}",httpSession.getId());
         return userResponseVo;
     }
@@ -55,7 +54,7 @@ public class UserController {
     @GetMapping("/user")
     public ResponseVo<User> userLogin(HttpSession session){
         log.info("/user sessionId={}", session.getId());
-        User user = (User) session.getAttribute(MallConst.CURRET_USER);
+        User user = (User) session.getAttribute(MallConst.CURRENT_USER);
         return ResponseVo.success(user);
     }
 
@@ -66,7 +65,7 @@ public class UserController {
     public ResponseVo logout(HttpSession session){
 
         log.info("/user/logout sessionId={}",session.getId());
-        session.removeAttribute(MallConst.CURRET_USER);
+        session.removeAttribute(MallConst.CURRENT_USER);
         return ResponseVo.success();
     }
 
