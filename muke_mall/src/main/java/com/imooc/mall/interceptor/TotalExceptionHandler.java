@@ -1,4 +1,4 @@
-package com.imooc.mall.exception;
+package com.imooc.mall.interceptor;
 
 import com.imooc.mall.enums.ResponseEnum;
 import com.imooc.mall.vo.ResponseVo;

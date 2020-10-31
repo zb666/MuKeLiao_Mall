@@ -1,4 +1,4 @@
-package com.imooc.mall.exception;
+package com.imooc.mall.interceptor;
 
 public class UserLoginExceptionHandler extends RuntimeException {
 }

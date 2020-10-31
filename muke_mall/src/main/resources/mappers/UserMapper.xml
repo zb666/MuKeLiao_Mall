@@ -39,9 +39,6 @@
   <insert id="insertSelective" parameterType="com.imooc.mall.pojo.User">
     insert into mall_user
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        id,
-      </if>
       <if test="username != null">
         username,
       </if>
@@ -51,23 +48,8 @@
       <if test="email != null">
         email,
       </if>
-      <if test="phone != null">
-        phone,
-      </if>
-      <if test="question != null">
-        question,
-      </if>
-      <if test="answer != null">
-        answer,
-      </if>
       <if test="role != null">
         role,
-      </if>
-      <if test="createTime != null">
-        create_time,
-      </if>
-      <if test="updateTime != null">
-        update_time,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -149,4 +131,33 @@
       update_time = #{updateTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+  <select id="countByUsername" parameterType="java.lang.String" resultType="java.lang.Integer">
+    select
+    count(1)
+    from mall_user
+    where username = #{username,jdbcType=VARCHAR}
+  </select>
+
+  <select id="countByEmail" parameterType="java.lang.String" resultType="java.lang.Integer">
+    select
+    count(1)
+    from mall_user
+    where email = #{email,jdbcType=VARCHAR}
+  </select>
+  <select id="selectByUsername" resultType="com.imooc.mall.pojo.User" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from mall_user
+    where username = #{username,jdbcType=VARCHAR}
+  </select>
+
+
+  <!--  <select id="selectByUsername" parameterType="java.lang.String" resultType="BaseResultMap">-->
+<!--    select-->
+<!--    <include refid="Base_Column_List"/>-->
+<!--    from mall_user-->
+<!--    where username = #{username,jdbcType=VARCHAR}-->
+<!--  </select>-->
+  
 </mapper>
