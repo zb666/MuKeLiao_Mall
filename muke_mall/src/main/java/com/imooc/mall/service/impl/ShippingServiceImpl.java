@@ -11,6 +11,7 @@ import com.imooc.mall.vo.ResponseVo;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashMap;
 import java.util.List;
@@ -22,6 +23,7 @@ public class ShippingServiceImpl implements IShoppingService {
     @Autowired
     private ShippingMapper shippingMapper;
 
+    @Transactional
     @Override
     public ResponseVo<Map<String, Integer>> add(Integer uid, ShippingForm shippingForm) {
         Shipping shipping = new Shipping();

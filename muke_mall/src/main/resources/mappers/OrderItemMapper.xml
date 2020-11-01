@@ -24,7 +24,7 @@
     from mall_order_item
     where id = #{id,jdbcType=INTEGER}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from mall_order_item
     where id = #{id,jdbcType=INTEGER}
   </delete>
@@ -161,4 +161,37 @@
       update_time = #{updateTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
   </update>
+<!-- 类似于批量的进行插入操作  insert into xxx values (a,b,c,x) 这种操作 -->
+  <insert id="batchInsert" parameterType="list">
+    insert into mall_order_item (user_id, order_no,
+    product_id, product_name, product_image,
+    current_unit_price, quantity, total_price)
+    values
+    <foreach collection="orderItemList" index="index" item="item" separator=",">
+      (
+      #{item.userId},
+      #{item.orderNo},
+      #{item.productId},
+      #{item.productName},
+      #{item.productImage},
+      #{item.currentUnitPrice},
+      #{item.quantity},
+      #{item.totalPrice}
+      )
+    </foreach>
+  </insert>
+  <select id="selectByOrderNoSet" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from mall_order_item
+    <where>
+      <if test="orderNoSet.size()>0">
+        order_no in
+        <foreach collection="orderNoSet" item="item" index="index" open="(" separator=","
+                 close=")">
+          #{item}
+        </foreach>
+      </if>
+    </where>
+  </select>
 </mapper>
